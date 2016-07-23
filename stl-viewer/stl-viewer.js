@@ -50,19 +50,8 @@ STLViewer.prototype.getEngine = function() {
 
 STLViewer.prototype.init = function() {
     this.initEngine();
+    // Scene initialisation triggers light set-up and rendering.
     this.initScene();
-    this.initCamera();
-    this.initLight();
-
-    // Render scene.
-    this.getEngine().runRenderLoop(function () {
-        this.getScene().render();
-    }.bind(this));
-
-    // Handle window resize events.
-    window.addEventListener("resize", function () {
-        this.getEngine().resize();
-    }.bind(this));
 };
 
 STLViewer.prototype.initEngine = function() {
@@ -70,13 +59,46 @@ STLViewer.prototype.initEngine = function() {
 };
 
 STLViewer.prototype.initScene = function() {
+    // Prepare...
     this.setScene(new BABYLON.Scene(this.getEngine()));
     this.getScene().clearColor = new BABYLON.Color3(0, 0, 0);
+
+    // ... and load STL file data.
+    $.ajax({
+        url: "stl-file.json",
+        success: function(response) {
+            // Render facets.
+            for (var i = 0; i < response["facet-normals"].length; i++) {
+                BABYLON.Mesh.CreateLines("par", [
+                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][0][0], response["facet-normals"][i]["vertices"][0][1], response["facet-normals"][i]["vertices"][0][2]),
+                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][1][0], response["facet-normals"][i]["vertices"][1][1], response["facet-normals"][i]["vertices"][1][2]),
+                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][2][0], response["facet-normals"][i]["vertices"][2][1], response["facet-normals"][i]["vertices"][2][2]),
+                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][0][0], response["facet-normals"][i]["vertices"][0][1], response["facet-normals"][i]["vertices"][0][2])
+                ], this.getScene());
+            }
+
+            // Continue initialization.
+            this.initCamera();
+            this.initLight();
+            // Render scene.
+            this.getEngine().runRenderLoop(function () {
+                this.getScene().render();
+            }.bind(this));
+
+            // Handle window resize events.
+            window.addEventListener("resize", function () {
+                this.getEngine().resize();
+            }.bind(this));
+        }.bind(this)
+    });
 };
 
 STLViewer.prototype.initCamera = function() {
     this.setCamera(new BABYLON.ArcRotateCamera("main-camera",  0, 0, 0, new BABYLON.Vector3(0, 0, 0), this.getScene()));
-    this.getCamera().setPosition(new BABYLON.Vector3(0, 10, -50));
+    this.getCamera().setPosition(new BABYLON.Vector3(
+        0,
+        40,
+        -200));
     this.getCamera().attachControl(this.getCanvas(), true);
 };
 
