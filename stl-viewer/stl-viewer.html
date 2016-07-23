@@ -28,11 +28,9 @@
     <script src="stl-viewer.js"></script>
     <script>
         var canvas = document.getElementById("renderCanvas");
-        var engine = new BABYLON.Engine(canvas, true);
 
         new STLViewer(
-            engine,
-            new BABYLON.Scene(engine)
+            canvas
         );
     </script>
 </body>

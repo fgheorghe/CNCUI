@@ -11,3 +11,7 @@ BabylonJS (http://babylonjs.com):
 <script src="http://www.babylonjs.com/oimo.js"></script>
 
 <script src="http://www.babylonjs.com/babylon.js"></script>
+
+Based on the following example:
+
+http://www.babylonjs-playground.com/
