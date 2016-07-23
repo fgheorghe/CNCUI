@@ -26,3 +26,6 @@ jsmockito-1.0.4-minified.js
 
 Browse to tests.html
 
+JSHamcrest (http://danielmartins.ninja/jshamcrest/):
+
+http://danielmartins.ninja/jshamcrest/jshamcrest-min.js
