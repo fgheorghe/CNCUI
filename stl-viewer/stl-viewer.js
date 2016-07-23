@@ -1,0 +1,1 @@
+var STLViewer = function() {};
