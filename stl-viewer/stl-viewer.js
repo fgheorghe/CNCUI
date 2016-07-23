@@ -1,6 +1,8 @@
 var STLViewer = function(engine, scene) {
     this.setScene(scene);
     this.setEngine(engine);
+
+    this.init();
 };
 
 STLViewer.prototype.setScene = function(scene) {
@@ -19,4 +21,8 @@ STLViewer.prototype.getScene = function() {
 
 STLViewer.prototype.getEngine = function() {
     return this.engine;
+};
+
+STLViewer.prototype.init = function() {
+    // TODO
 };

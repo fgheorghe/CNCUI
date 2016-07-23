@@ -26,5 +26,14 @@
 <body>
     <canvas id="renderCanvas" width="630" height="995" tabindex="1"></canvas>
     <script src="stl-viewer.js"></script>
+    <script>
+        var canvas = document.getElementById("renderCanvas");
+        var engine = new BABYLON.Engine(canvas, true);
+
+        new STLViewer(
+            engine,
+            new BABYLON.Scene(engine)
+        );
+    </script>
 </body>
 </html>
