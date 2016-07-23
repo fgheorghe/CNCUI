@@ -2,22 +2,22 @@
 JsMockito.Integration.QUnit();
 
 // Prepare mocks
-var canvasMock = JsMockito.mock(Object);
 var babylonEngineMock = JsMockito.mock(Object);
+var sceneMock = JsMockito.mock(Object);
 
-QUnit.test('Test constructor sets canvas and babylon engine.', function(assert) {
-    var stlViewer = new STLViewer(canvasMock, babylonEngineMock);
-
-    assert.equal(
-        canvasMock,
-        stlViewer.getCanvas(),
-        "Canvas DOM element set in STL Viewer."
-    );
+QUnit.test('Test constructor sets scene and babylon engine.', function(assert) {
+    var stlViewer = new STLViewer(sceneMock, babylonEngineMock);
 
     assert.equal(
         babylonEngineMock,
         stlViewer.getEngine(),
         "BabylonJS engine set in STL Viewer."
+    );
+
+    assert.equal(
+        canvasMock,
+        stlViewer.getScene(),
+        "BabylonJS scene set in STL Viewer."
     );
 });
 
