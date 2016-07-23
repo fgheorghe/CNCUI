@@ -6,7 +6,7 @@ var babylonEngineMock = JsMockito.mock(Object);
 var sceneMock = JsMockito.mock(Object);
 
 QUnit.test('Test constructor sets scene and babylon engine.', function(assert) {
-    var stlViewer = new STLViewer(sceneMock, babylonEngineMock);
+    var stlViewer = new STLViewer(babylonEngineMock, sceneMock);
 
     assert.equal(
         babylonEngineMock,
@@ -15,7 +15,7 @@ QUnit.test('Test constructor sets scene and babylon engine.', function(assert) {
     );
 
     assert.equal(
-        canvasMock,
+        sceneMock,
         stlViewer.getScene(),
         "BabylonJS scene set in STL Viewer."
     );

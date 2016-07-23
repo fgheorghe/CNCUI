@@ -1,10 +1,10 @@
-var STLViewer = function(canvas, engine) {
-    this.setCanvas(canvas);
+var STLViewer = function(engine, scene) {
+    this.setScene(scene);
     this.setEngine(engine);
 };
 
-STLViewer.prototype.setCanvas = function(canvas) {
-    this.canvas = canvas;
+STLViewer.prototype.setScene = function(scene) {
+    this.scene = scene;
     return this;
 };
 
@@ -13,8 +13,8 @@ STLViewer.prototype.setEngine = function(engine) {
     return this;
 };
 
-STLViewer.prototype.getCanvas = function() {
-    return this.canvas;
+STLViewer.prototype.getScene = function() {
+    return this.scene;
 };
 
 STLViewer.prototype.getEngine = function() {
