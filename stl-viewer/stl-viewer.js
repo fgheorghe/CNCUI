@@ -65,8 +65,9 @@ STLViewer.prototype.initScene = function() {
 
     // ... and load STL file data.
     $.ajax({
-        url: "stl-file.json",
+        url: "/stl/coordinates/ascii",
         success: function(response) {
+            response = response.data;
             // Render facets.
             for (var i = 0; i < response["facet-normals"].length; i++) {
                 BABYLON.Mesh.CreateLines("par", [
