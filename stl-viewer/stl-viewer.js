@@ -58,6 +58,17 @@ STLViewer.prototype.initEngine = function() {
     this.setEngine(new BABYLON.Engine(this.getCanvas(), true));
 };
 
+// As per: https://css-tricks.com/snippets/javascript/get-url-variables/
+STLViewer.prototype.getQueryVariable = function(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+    }
+    return(false);
+};
+
 STLViewer.prototype.initScene = function() {
     // Prepare...
     this.setScene(new BABYLON.Scene(this.getEngine()));
@@ -65,7 +76,7 @@ STLViewer.prototype.initScene = function() {
 
     // ... and load STL file data.
     $.ajax({
-        url: "/stl/coordinates/ascii",
+        url: "/stl/coordinates/" + this.getQueryVariable('name'),
         success: function(response) {
             response = response.data;
             // Render facets.
