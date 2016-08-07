@@ -76,16 +76,15 @@ STLViewer.prototype.initScene = function() {
 
     // ... and load STL file data.
     $.ajax({
-        url: "/stl/coordinates/" + this.getQueryVariable('name'),
+        url: "/stl/get?id=" + this.getQueryVariable('id') + "&column=" + this.getQueryVariable('column'),
         success: function(response) {
-            response = response.data;
             // Render facets.
-            for (var i = 0; i < response["facet-normals"].length; i++) {
+            for (var i = 0; i < response["facets"].length; i++) {
                 BABYLON.Mesh.CreateLines("par", [
-                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][0][0], response["facet-normals"][i]["vertices"][0][1], response["facet-normals"][i]["vertices"][0][2]),
-                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][1][0], response["facet-normals"][i]["vertices"][1][1], response["facet-normals"][i]["vertices"][1][2]),
-                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][2][0], response["facet-normals"][i]["vertices"][2][1], response["facet-normals"][i]["vertices"][2][2]),
-                    new BABYLON.Vector3(response["facet-normals"][i]["vertices"][0][0], response["facet-normals"][i]["vertices"][0][1], response["facet-normals"][i]["vertices"][0][2])
+                    new BABYLON.Vector3(response["facets"][i]["vertex"][0][0], response["facets"][i]["vertex"][0][1], response["facets"][i]["vertex"][0][2]),
+                    new BABYLON.Vector3(response["facets"][i]["vertex"][1][0], response["facets"][i]["vertex"][1][1], response["facets"][i]["vertex"][1][2]),
+                    new BABYLON.Vector3(response["facets"][i]["vertex"][2][0], response["facets"][i]["vertex"][2][1], response["facets"][i]["vertex"][2][2]),
+                    new BABYLON.Vector3(response["facets"][i]["vertex"][0][0], response["facets"][i]["vertex"][0][1], response["facets"][i]["vertex"][0][2])
                 ], this.getScene());
             }
 
